@@ -5,7 +5,8 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 
-import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';               //  <-- Import ngx-markdown
+import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
+import { provideClientHydration } from '@angular/platform-browser';              
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,9 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
-    // provideMarkdown ({
-    //   sanitize: SecurityContext.NONE
-    // }),
     provideMarkdown({
       markedOptions: {
         provide: MARKED_OPTIONS,
@@ -25,9 +23,7 @@ export const appConfig: ApplicationConfig = {
           pedantic: false,
         },
       },
-    }),
-
-                                       
+    }), provideClientHydration(),
   ],
 };
 
